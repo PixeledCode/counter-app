@@ -1,2 +1,33 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import { Button, List } from '$lib/components';
+	import store from '$lib/counter.store';
+
+	export const storeList = $store;
+
+	console.log(storeList);
+
+	export const defaultList = [
+		{
+			name: 'Chai',
+			count: 0
+		}
+	];
+</script>
+
+<main class="container max-w-[480px]">
+	<div class="p-2 grid grid-rows-[auto_1fr_auto] gap-2 h-[100svh]">
+		<h1 class="sr-only">Counter App</h1>
+		<div class="flex justify-end">
+			{#if storeList.length > 0}
+				<Button variant="ghost">Edit</Button>
+			{/if}
+		</div>
+		<List list={storeList} />
+		<div class="m-3">
+			<Button class="w-full mx-auto">Add new count</Button>
+		</div>
+	</div>
+</main>
+
+<style lang="postcss">
+</style>
