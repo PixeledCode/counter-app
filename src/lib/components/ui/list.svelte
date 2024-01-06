@@ -17,6 +17,11 @@
 		});
 		store.editList(newArr);
 	}
+
+	function deleteItem(name: string) {
+		const newArr = $store.filter((item) => item.name !== name);
+		store.editList(newArr);
+	}
 </script>
 
 {#if $store.length === 0}
@@ -32,7 +37,7 @@
 				<div class="flex items-center justify-between gap-2 flex-wrap">
 					<h2 class="text-xl font-semibold tracking-tight">{name}</h2>
 					{#if editMode === true}
-						<button>
+						<button on:click={() => deleteItem(name)}>
 							<p class="text-sm text-red-500">Delete</p>
 						</button>
 					{/if}
