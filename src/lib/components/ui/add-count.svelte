@@ -6,7 +6,7 @@
 	export const editStore = store.editList;
 
 	let name = '';
-	let count = 0;
+	let count = '';
 
 	let drawerOpen = false;
 </script>
@@ -16,7 +16,7 @@
 	onOpenChange={(e) => {
 		drawerOpen = e;
 		name = '';
-		count = 0;
+		count = '';
 	}}
 >
 	<Drawer.Trigger asChild let:builder>
@@ -48,6 +48,7 @@
 					type="number"
 					id="count"
 					value={count}
+					placeholder="0"
 					on:input={(e) => {
 						// @ts-ignore
 						count = e.target.value;
@@ -72,7 +73,7 @@
 						}
 						editStore([...$store, { name, count: Number(count) }]);
 						name = '';
-						count = 0;
+						count = '';
 						drawerOpen = false;
 					} else {
 						toast.error('Name is required', {
