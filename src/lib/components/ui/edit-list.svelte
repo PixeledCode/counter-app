@@ -83,11 +83,11 @@
 			</article>
 		{/each}
 	</section>
-	<Button
-		on:click={() => {
-			store.editList(list);
-			editMode = false;
-		}}
-		class="w-full mx-auto">Save</Button
-	>
 {/if}
+<Button
+	on:click={() => {
+		store.editList(list);
+		editMode = false;
+	}}
+	class="w-full mx-auto">Save</Button
+>

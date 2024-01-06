@@ -40,7 +40,7 @@
 			</article>
 		{/each}
 	</section>
-	<div class="m-3">
-		<AddCount />
-	</div>
 {/if}
+<div class="m-3">
+	<AddCount />
+</div>
