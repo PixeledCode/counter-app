@@ -3,6 +3,8 @@
 	import { Button } from '$lib/components';
 	import store from '$lib/counter.store';
 
+	export let editMode: boolean;
+
 	function changeCount(name: string, type: 'add' | 'reduce') {
 		const newArr = $store.map((item) => {
 			if (item.name === name) {
@@ -27,7 +29,14 @@
 	<section class="flex flex-col gap-6 mt-4">
 		{#each $store as { name, count }}
 			<article class="flex flex-col gap-1">
-				<h2 class="text-xl font-semibold tracking-tight">{name}</h2>
+				<div class="flex items-center justify-between gap-2 flex-wrap">
+					<h2 class="text-xl font-semibold tracking-tight">{name}</h2>
+					{#if editMode === true}
+						<button>
+							<p class="text-sm text-red-500">Delete</p>
+						</button>
+					{/if}
+				</div>
 				<div class="flex justify-between items-center gap-2">
 					<Button variant="outline" size="icon" on:click={() => changeCount(name, 'reduce')}
 						><Minus /></Button

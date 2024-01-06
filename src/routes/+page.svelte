@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Button, List, AddCount } from '$lib/components';
 	import store from '$lib/counter.store';
+
+	export let editMode = false;
 </script>
 
 <main class="container max-w-[480px]">
@@ -8,12 +10,22 @@
 		<h1 class="sr-only">Counter App</h1>
 		<div class="flex justify-end">
 			{#if $store.length > 0}
-				<Button variant="ghost">Edit</Button>
+				<Button variant="ghost" on:click={() => (editMode = !editMode)}>
+					{#if editMode}
+						Cancel
+					{:else}
+						Edit
+					{/if}
+				</Button>
 			{/if}
 		</div>
-		<List />
+		<List bind:editMode />
 		<div class="m-3">
-			<AddCount />
+			{#if editMode}
+				<Button class="w-full mx-auto">Save</Button>
+			{:else}
+				<AddCount />
+			{/if}
 		</div>
 	</div>
 </main>
