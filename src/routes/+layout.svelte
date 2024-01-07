@@ -12,7 +12,3 @@
 
 <Toaster />
 <slot />
-
-{#await import('$lib/ReloadPrompt.svelte') then { default: ReloadPrompt }}
-	<ReloadPrompt />
-{/await}
