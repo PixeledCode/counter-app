@@ -28,14 +28,20 @@
 
 	let temp = [...$store];
 
-	function prevTransition(index: number) {
+	function getNodes(index: number) {
 		let prevNode = document.querySelector(`#prev-count-${index}`) as HTMLElement;
 		let currentNode = document.querySelector(`#current-count-${index}`) as HTMLElement;
 		let nextNode = document.querySelector(`#next-count-${index}`) as HTMLElement;
+
+		return { prevNode, currentNode, nextNode };
+	}
+
+	function prevTransition(index: number) {
+		const { prevNode, currentNode, nextNode } = getNodes(index);
 		gsap.to([prevNode, currentNode], {
 			duration: 0.3,
 			y: -28,
-			ease: 'power2.inOut',
+			ease: 'power4.out',
 			onComplete: () => {
 				nextNode.innerHTML = currentNode.innerHTML;
 				currentNode.innerHTML = prevNode.innerHTML;
@@ -46,13 +52,11 @@
 	}
 
 	function nextTransition(index: number) {
-		let prevNode = document.querySelector(`#prev-count-${index}`) as HTMLElement;
-		let currentNode = document.querySelector(`#current-count-${index}`) as HTMLElement;
-		let nextNode = document.querySelector(`#next-count-${index}`) as HTMLElement;
+		const { prevNode, currentNode, nextNode } = getNodes(index);
 		gsap.to([nextNode, currentNode], {
 			duration: 0.3,
 			y: 28,
-			ease: 'power2.inOut',
+			ease: 'power4.out',
 			onComplete: () => {
 				prevNode.innerHTML = currentNode.innerHTML;
 				currentNode.innerHTML = nextNode.innerHTML;
@@ -60,15 +64,6 @@
 				nextNode.innerHTML = String(Number(nextNode.innerHTML) + 1);
 			}
 		});
-	}
-
-	function replaceClass(
-		node: { classList: { remove: (arg0: any) => void; add: (arg0: any) => void } },
-		oldClass: string,
-		newClass: string
-	) {
-		node.classList.remove(oldClass);
-		node.classList.add(newClass);
 	}
 </script>
 
