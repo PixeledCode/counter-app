@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Minus, Plus, CandyOff } from 'lucide-svelte';
 	import { AddCount, Button } from '$lib/components';
 	import store from '$lib/counter.store';
+	import { CandyOff, Minus, Plus } from 'lucide-svelte';
 
 	function changeCount(name: string, type: 'add' | 'reduce') {
 		const newArr = [...$store].map((item) => {

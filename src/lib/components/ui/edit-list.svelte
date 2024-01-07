@@ -6,6 +6,7 @@
 	export let editMode: boolean;
 
 	function updateCount(name: string, type: 'add' | 'reduce' | 'change', newCount?: number) {
+		// when the user changes the count manually
 		if (type === 'change') {
 			const newArr = list.map((item) => {
 				if (item.name === name) {
@@ -20,6 +21,7 @@
 			return;
 		}
 
+		// when the user clicks on the add or reduce button
 		const newArr = list.map((item) => {
 			if (item.name === name) {
 				return {
@@ -42,7 +44,6 @@
 	<section class="flex flex-col justify-center gap-6 mt-4">
 		<CandyOff class=" mx-auto" size={64} />
 		<h2 class="text-xl font-semibold tracking-tight text-center">All items removed</h2>
-		<p class="text-center">Click on save to save these changes</p>
 	</section>
 {:else}
 	<section class="flex flex-col gap-6 mt-4">
