@@ -63,7 +63,7 @@
 
 					<Input
 						type="number"
-						class="text-center w-max font-semibold"
+						class="text-center w-max font-semibold max-w-20"
 						value={count}
 						placeholder="0"
 						on:input={(e) => {
