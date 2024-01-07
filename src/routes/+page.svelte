@@ -5,14 +5,14 @@
 	$: editMode = false;
 </script>
 
-<main class="container max-w-[480px]">
+<div class="container max-w-[480px]">
 	<div class="p-2 grid grid-rows-[auto_1fr_auto] gap-2 h-[100svh]">
 		<h1 class="sr-only">Counter App</h1>
 		<div class="flex justify-end">
 			{#if $store.length > 0 || editMode}
 				<Button variant="ghost" on:click={() => (editMode = !editMode)}>
 					{#if editMode}
-						Cancel
+						Cancels
 					{:else}
 						Edit
 					{/if}
@@ -25,4 +25,4 @@
 			<List />
 		{/if}
 	</div>
-</main>
+</div>
