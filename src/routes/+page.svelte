@@ -12,7 +12,7 @@
 			{#if $store.length > 0 || editMode}
 				<Button variant="ghost" on:click={() => (editMode = !editMode)}>
 					{#if editMode}
-						Cancels
+						Cancel
 					{:else}
 						Edit
 					{/if}
