@@ -2,7 +2,7 @@
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
-	import '../app.pcss';
+	import '../app.css';
 
 	onMount(async () => {
 		if (pwaInfo) {

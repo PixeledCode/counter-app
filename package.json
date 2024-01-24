@@ -38,7 +38,6 @@
 	"dependencies": {
 		"bits-ui": "^0.13.2",
 		"clsx": "^2.1.0",
-		"gsap": "^3.12.4",
 		"lucide-svelte": "^0.306.0",
 		"mode-watcher": "^0.1.2",
 		"svelte-sonner": "^0.3.10",
