@@ -1,7 +1,14 @@
 <script lang="ts">
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { MenuIcon } from 'lucide-svelte';
+	import { shareScreenshot } from './screenshot';
 	export let onClick: (e: CustomEvent<string>) => void;
+
+	let canShare = 'share' in navigator;
+
+	function handleShare() {
+		shareScreenshot(document.querySelector('.list-container') as HTMLElement);
+	}
 </script>
 
 <DropdownMenu.Root>
@@ -21,5 +28,8 @@
 		<DropdownMenu.Item on:click={() => onClick(new CustomEvent('click', { detail: 'Logs' }))}>
 			Logs
 		</DropdownMenu.Item>
+		{#if canShare}
+			<DropdownMenu.Item on:click={handleShare}>Share</DropdownMenu.Item>
+		{/if}
 	</DropdownMenu.Content>
 </DropdownMenu.Root>
