@@ -6,13 +6,24 @@
 	export let editMode: boolean;
 
 	function updateCount(name: string, type: 'add' | 'reduce' | 'change', newCount?: number) {
+		const date = new Date();
+
 		// when the user changes the count manually
 		if (type === 'change') {
 			const newArr = list.map((item) => {
 				if (item.name === name) {
+					const lastActivity = item.meta.activity[item.meta.activity.length - 1];
 					return {
 						...item,
-						count: Number(newCount)
+						count: Number(newCount),
+						meta: {
+							...item.meta,
+							last_update: date,
+							activity:
+								new Date(lastActivity).toLocaleDateString() === date.toLocaleDateString()
+									? [...item.meta.activity.slice(0, -1), date]
+									: [...item.meta.activity, date]
+						}
 					};
 				}
 				return item;
@@ -24,9 +35,18 @@
 		// when the user clicks on the add or reduce button
 		const newArr = list.map((item) => {
 			if (item.name === name) {
+				const lastActivity = item.meta.activity[item.meta.activity.length - 1];
 				return {
 					...item,
-					count: type === 'reduce' ? item.count - 1 : item.count + 1
+					count: type === 'reduce' ? item.count - 1 : item.count + 1,
+					meta: {
+						...item.meta,
+						last_update: date,
+						activity:
+							new Date(lastActivity).toLocaleDateString() === date.toLocaleDateString()
+								? [...item.meta.activity.slice(0, -1), date]
+								: [...item.meta.activity, date]
+					}
 				};
 			}
 			return item;

@@ -13,7 +13,7 @@
 	</section>
 {:else}
 	<section class="flex flex-col gap-6 mt-4">
-		{#each $store as { name, count }, i}
+		{#each $store as { name, count }}
 			<Count {name} {count} />
 		{/each}
 	</section>

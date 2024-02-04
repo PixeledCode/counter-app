@@ -23,11 +23,21 @@
 			count += 1;
 		}
 
-		const newArr = [...$store].map((item, i) => {
+		const newArr = [...$store].map((item) => {
 			if (item.name === name) {
+				const date = new Date();
+				const lastActivity = item.meta.activity[item.meta.activity.length - 1];
 				return {
 					...item,
-					count: count
+					count: count,
+					meta: {
+						...item.meta,
+						last_update: date,
+						activity:
+							new Date(lastActivity).toLocaleDateString() === date.toLocaleDateString()
+								? [...item.meta.activity.slice(0, -1), date]
+								: [...item.meta.activity, date]
+					}
 				};
 			}
 			return item;

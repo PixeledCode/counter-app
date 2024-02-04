@@ -71,7 +71,19 @@
 							});
 							return;
 						}
-						editStore([...$store, { name, count: Number(count) }]);
+						const date = new Date();
+						editStore([
+							...$store,
+							{
+								name,
+								count: Number(count),
+								meta: {
+									creation_date: date,
+									last_update: date,
+									activity: [date]
+								}
+							}
+						]);
 						name = '';
 						count = '';
 						drawerOpen = false;

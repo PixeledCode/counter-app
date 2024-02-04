@@ -1,8 +1,29 @@
 <script lang="ts">
 	import { Button, List, EditList } from '$lib/components';
+	import Menu from '$lib/components/ui/menu.svelte';
 	import store from '$lib/counter.store';
 
 	$: editMode = false;
+	$: logMode = false;
+
+	function handleEdit() {
+		editMode = !editMode;
+	}
+
+	function handleLogs() {
+		logMode = !logMode;
+	}
+
+	function handleMenuChange(e: { detail: string }) {
+		if (e.detail === 'Edit') {
+			handleEdit();
+			return;
+		}
+		if (e.detail === 'Logs') {
+			handleLogs();
+			return;
+		}
+	}
 </script>
 
 <div class="container max-w-[480px]">
@@ -10,13 +31,11 @@
 		<h1 class="sr-only">Counter App</h1>
 		<div class="flex justify-end">
 			{#if $store.length > 0 || editMode}
-				<Button variant="ghost" on:click={() => (editMode = !editMode)}>
-					{#if editMode}
-						Cancel
-					{:else}
-						Edit
-					{/if}
-				</Button>
+				{#if editMode}
+					<Button variant="ghost" on:click={handleEdit}>Cancel</Button>
+				{:else}
+					<Menu onClick={handleMenuChange} />
+				{/if}
 			{/if}
 		</div>
 		{#if editMode}
