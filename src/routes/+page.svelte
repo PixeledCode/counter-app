@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button, List, EditList } from '$lib/components';
-	import Activity from '$lib/components/ui/activity.svelte';
+	import Activity from '$lib/components/ui/activity/activity.svelte';
 	import Menu from '$lib/components/ui/menu.svelte';
 	import store from '$lib/counter.store';
 

@@ -1,8 +1,6 @@
 <script lang="ts">
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { MenuIcon } from 'lucide-svelte';
-	import Logs from './activity.svelte';
-
 	export let onClick: (e: CustomEvent<string>) => void;
 </script>
 

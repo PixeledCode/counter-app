@@ -18,6 +18,13 @@ const buttonVariants = tv({
 			sm: 'h-9 rounded-md px-3',
 			lg: 'h-11 rounded-md px-8',
 			icon: 'h-10 w-10'
+		},
+		rounded: {
+			none: 'rounded-none',
+			sm: 'rounded-sm',
+			md: 'rounded-md',
+			lg: 'rounded-lg',
+			full: 'rounded-full'
 		}
 	},
 	defaultVariants: {
@@ -28,10 +35,12 @@ const buttonVariants = tv({
 
 type Variant = VariantProps<typeof buttonVariants>['variant'];
 type Size = VariantProps<typeof buttonVariants>['size'];
+type Rounded = VariantProps<typeof buttonVariants>['rounded'];
 
 type Props = ButtonPrimitive.Props & {
 	variant?: Variant;
 	size?: Size;
+	rounded?: Rounded;
 };
 
 type Events = ButtonPrimitive.Events;
