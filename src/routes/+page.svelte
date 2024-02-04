@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Button, List, EditList } from '$lib/components';
+	import Activity from '$lib/components/ui/activity.svelte';
 	import Menu from '$lib/components/ui/menu.svelte';
 	import store from '$lib/counter.store';
 
@@ -10,17 +11,17 @@
 		editMode = !editMode;
 	}
 
-	function handleLogs() {
-		logMode = !logMode;
+	function handleLogs(status: boolean) {
+		logMode = status;
 	}
 
-	function handleMenuChange(e: { detail: string }) {
+	function handleMenuChange(e: { detail: string }, status: boolean = true) {
 		if (e.detail === 'Edit') {
 			handleEdit();
 			return;
 		}
 		if (e.detail === 'Logs') {
-			handleLogs();
+			handleLogs(status);
 			return;
 		}
 	}
@@ -44,4 +45,5 @@
 			<List />
 		{/if}
 	</div>
+	<Activity {logMode} {handleMenuChange} />
 </div>

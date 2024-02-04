@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { MenuIcon } from 'lucide-svelte';
+	import Logs from './activity.svelte';
 
 	export let onClick: (e: CustomEvent<string>) => void;
 </script>
@@ -16,13 +17,11 @@
 		<MenuIcon />
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Content align="end">
-		<DropdownMenu.Group>
-			<DropdownMenu.Item on:click={() => onClick(new CustomEvent('click', { detail: 'Edit' }))}
-				>Edit</DropdownMenu.Item
-			>
-			<DropdownMenu.Item on:click={() => onClick(new CustomEvent('click', { detail: 'Logs' }))}
-				>Logs</DropdownMenu.Item
-			>
-		</DropdownMenu.Group>
+		<DropdownMenu.Item on:click={() => onClick(new CustomEvent('click', { detail: 'Edit' }))}>
+			Edit
+		</DropdownMenu.Item>
+		<DropdownMenu.Item on:click={() => onClick(new CustomEvent('click', { detail: 'Logs' }))}>
+			Logs
+		</DropdownMenu.Item>
 	</DropdownMenu.Content>
 </DropdownMenu.Root>
