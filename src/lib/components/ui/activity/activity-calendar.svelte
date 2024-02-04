@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Calendar } from '$lib/components/ui/calendar';
-	import { today, getLocalTimeZone, parseDate, CalendarDate } from '@internationalized/date';
-	import Button from '../button/button.svelte';
+	import { parseDate } from '@internationalized/date';
 	import { ChevronLeft } from 'lucide-svelte';
+	import Button from '../button/button.svelte';
 	export let activeCounter: {
 		name: string;
 		count: number;
