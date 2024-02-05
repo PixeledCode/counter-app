@@ -12,7 +12,7 @@
 		<p class="text-center">Add a new item to get started</p>
 	</section>
 {:else}
-	<section class="flex flex-col gap-6 mt-4 p-4 list-container bg-background">
+	<section class="flex flex-col gap-6 py-4 px-4 mx-[-16px] list-container bg-background">
 		{#each $store as { name, count }}
 			<Count {name} {count} />
 		{/each}
