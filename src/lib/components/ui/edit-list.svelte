@@ -6,24 +6,25 @@
 	export let editMode: boolean;
 
 	function updateCount(name: string, type: 'add' | 'reduce' | 'change', newCount?: number) {
-		const date = new Date();
+		const date = new Date().toISOString().split('T')[0];
 
 		// when the user changes the count manually
 		if (type === 'change') {
 			const newArr = list.map((item) => {
-				if (item.name === name) {
-					const lastActivity = item.meta.activity[item.meta.activity.length - 1];
+				if (item.name === name && Number(newCount) !== item.count) {
+					if (Number(newCount) < 0) return item;
+
 					return {
 						...item,
-						count: Number(newCount),
 						meta: {
 							...item.meta,
 							last_update: date,
-							activity:
-								new Date(lastActivity).toLocaleDateString() === date.toLocaleDateString()
-									? [...item.meta.activity.slice(0, -1), date]
-									: [...item.meta.activity, date]
-						}
+							activity: {
+								...item.meta.activity,
+								[date]: item.meta.activity[date] + (Number(newCount) < item.count ? -1 : 1)
+							}
+						},
+						count: Number(newCount)
 					};
 				}
 				return item;
@@ -35,17 +36,17 @@
 		// when the user clicks on the add or reduce button
 		const newArr = list.map((item) => {
 			if (item.name === name) {
-				const lastActivity = item.meta.activity[item.meta.activity.length - 1];
+				if (type === 'reduce' && item.count === 0) return item;
 				return {
 					...item,
 					count: type === 'reduce' ? item.count - 1 : item.count + 1,
 					meta: {
 						...item.meta,
 						last_update: date,
-						activity:
-							new Date(lastActivity).toLocaleDateString() === date.toLocaleDateString()
-								? [...item.meta.activity.slice(0, -1), date]
-								: [...item.meta.activity, date]
+						activity: {
+							...item.meta.activity,
+							[date]: item.meta.activity[date] + (type === 'reduce' ? -1 : 1)
+						}
 					}
 				};
 			}
@@ -57,6 +58,13 @@
 	function deleteItem(name: string) {
 		const newArr = list.filter((item) => item.name !== name);
 		list = newArr;
+	}
+
+	function onInput(e: any) {
+		const { value } = e.target;
+		if (Number(value) < 0) return Math.abs(value);
+
+		return value;
 	}
 </script>
 
@@ -85,14 +93,12 @@
 						type="number"
 						class="text-center w-max font-semibold max-w-20"
 						value={count}
+						min="0"
 						placeholder="0"
 						on:input={(e) => {
-							// @ts-ignore
-							count = e.target.value;
+							count = onInput(e);
 						}}
-						on:change={(e) => {
-							// @ts-ignore
-							count = e.target.value;
+						on:change={() => {
 							updateCount(name, 'change', Number(count));
 						}}
 					/>

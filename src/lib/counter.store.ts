@@ -5,9 +5,11 @@ type Props = {
 	name: string;
 	count: number;
 	meta: {
-		creation_date: Date;
-		last_update: Date;
-		activity: Date[];
+		creation_date: string;
+		last_update: string;
+		activity: {
+			[isoDate: string]: number;
+		};
 	};
 }[];
 
@@ -15,20 +17,22 @@ const storedList = (browser && localStorage.getItem('count_list')) || null;
 const parsedList: Props = storedList ? JSON.parse(storedList) : [];
 
 function createCount() {
-	// migration from old version. TODO: remove in future
 	let newList: Props = parsedList;
+
+	// migration from old version. TODO: remove in future
 	if (parsedList.length > 0 && !parsedList[0].meta) {
 		newList = parsedList.map((item) => {
 			if (item.meta) {
 				return item;
 			}
 
+			const date = new Date();
 			return {
 				...item,
 				meta: {
-					creation_date: new Date(),
-					last_update: new Date(),
-					activity: []
+					creation_date: date.toISOString().split('T')[0],
+					last_update: date.toISOString().split('T')[0],
+					activity: {}
 				}
 			};
 		});

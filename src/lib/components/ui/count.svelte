@@ -17,6 +17,8 @@
 	}
 
 	function changeCount(name: string, type: 'add' | 'reduce') {
+		if (type === 'reduce' && count === 0) return;
+
 		if (type === 'reduce') {
 			count -= 1;
 		} else {
@@ -25,18 +27,17 @@
 
 		const newArr = [...$store].map((item) => {
 			if (item.name === name) {
-				const date = new Date();
-				const lastActivity = item.meta.activity[item.meta.activity.length - 1];
+				const date = new Date().toISOString().split('T')[0];
 				return {
 					...item,
-					count: count,
+					count,
 					meta: {
 						...item.meta,
 						last_update: date,
-						activity:
-							new Date(lastActivity).toLocaleDateString() === date.toLocaleDateString()
-								? [...item.meta.activity.slice(0, -1), date]
-								: [...item.meta.activity, date]
+						activity: {
+							...item.meta.activity,
+							[date]: item.meta.activity[date] + (type === 'reduce' ? -1 : 1)
+						}
 					}
 				};
 			}

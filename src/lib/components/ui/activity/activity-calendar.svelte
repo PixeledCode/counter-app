@@ -7,14 +7,22 @@
 		name: string;
 		count: number;
 		meta: {
-			activity: Date[];
+			activity: {
+				[key: string]: string;
+			};
 			last_update: any;
 		};
 	} | null;
 
-	const selectedDates = activeCounter?.meta.activity.map((item: Date) => {
-		return parseDate(new Date(item).toISOString().split('T')[0]);
-	});
+	const selectedDates = Object.keys(activeCounter?.meta.activity || {})
+		.map((item: string) => {
+			if (!Number.isNaN(Number(item))) {
+				return;
+			}
+			if (Number(activeCounter?.meta.activity[item]) !== 0) return parseDate(item);
+			return;
+		})
+		.filter(Boolean);
 </script>
 
 <div class="px-4 mt-4 w-full">
@@ -29,5 +37,5 @@
 		</div>
 	{/if}
 
-	<Calendar value={selectedDates || []} class="border rounded-md w-[276px] mx-auto" />
+	<Calendar value={selectedDates || []} class="border rounded-md w-[300px] mx-auto" />
 </div>

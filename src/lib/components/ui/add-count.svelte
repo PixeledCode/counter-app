@@ -36,6 +36,7 @@
 					type="text"
 					id="name"
 					value={name}
+					autocomplete="off"
 					on:input={(e) => {
 						// @ts-ignore
 						name = e.target.value;
@@ -60,7 +61,7 @@
 		<Drawer.Footer>
 			<Button
 				on:click={() => {
-					if (name) {
+					if (name && Number(count) >= 0) {
 						const alreadyExists = $store.find((item) => item.name === name);
 						if (alreadyExists) {
 							toast.error('Name already exists', {
@@ -71,7 +72,7 @@
 							});
 							return;
 						}
-						const date = new Date();
+						const date = new Date().toISOString().split('T')[0];
 						editStore([
 							...$store,
 							{
@@ -80,7 +81,9 @@
 								meta: {
 									creation_date: date,
 									last_update: date,
-									activity: [date]
+									activity: {
+										[date]: 0
+									}
 								}
 							}
 						]);
@@ -88,7 +91,7 @@
 						count = '';
 						drawerOpen = false;
 					} else {
-						toast.error('Name is required', {
+						toast.error('Name is required and minimum count is 0', {
 							action: {
 								label: 'Dismiss',
 								onClick: () => {}
