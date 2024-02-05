@@ -2,7 +2,7 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { MenuIcon } from 'lucide-svelte';
 	import { shareScreenshot } from './screenshot';
-	export let onClick: (e: CustomEvent<string>) => void;
+	export let onClick: (e: { detail: string }, b?: boolean) => void;
 
 	let canShare = 'share' in navigator;
 
@@ -22,12 +22,8 @@
 		<MenuIcon />
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Content align="end">
-		<DropdownMenu.Item on:click={() => onClick(new CustomEvent('click', { detail: 'Edit' }))}>
-			Edit
-		</DropdownMenu.Item>
-		<DropdownMenu.Item on:click={() => onClick(new CustomEvent('click', { detail: 'Logs' }))}>
-			Logs
-		</DropdownMenu.Item>
+		<DropdownMenu.Item on:click={() => onClick({ detail: 'Edit' })}>Edit</DropdownMenu.Item>
+		<DropdownMenu.Item on:click={() => onClick({ detail: 'Logs' }, true)}>Logs</DropdownMenu.Item>
 		{#if canShare}
 			<DropdownMenu.Item on:click={handleShare}>Share</DropdownMenu.Item>
 		{/if}

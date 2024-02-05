@@ -15,7 +15,7 @@
 		logMode = status;
 	}
 
-	function handleMenuChange(e: { detail: string }, status = true) {
+	function handleMenuChange(e: { detail: string }, status = false) {
 		if (e.detail === 'Edit') {
 			handleEdit();
 			return;
