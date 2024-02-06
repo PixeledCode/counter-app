@@ -36,7 +36,7 @@
 						last_update: date,
 						activity: {
 							...item.meta.activity,
-							[date]: item.meta.activity[date] + (type === 'reduce' ? -1 : 1)
+							[date]: (item.meta.activity[date] || 0) + (type === 'reduce' ? -1 : 1)
 						}
 					}
 				};
