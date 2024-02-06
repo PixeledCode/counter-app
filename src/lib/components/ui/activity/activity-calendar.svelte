@@ -23,8 +23,6 @@
 			return;
 		})
 		.filter(Boolean);
-
-	console.log(activeCounter?.meta);
 </script>
 
 <div class="px-4 mt-4 w-full">
