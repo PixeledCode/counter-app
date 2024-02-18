@@ -1,24 +1,40 @@
 # counter-app
 
-A PWA app to create and track counter for tasks.
+A PWA app to tract stuff and perform habit tracking
 
-## Creating a project
+## Installation
 
-## Developing
+To get started with this application, you will need to follow these steps:
 
-```bash
-npm run dev
+1. Clone the repository: `git clone https://github.com/PixeledCode/counter-app.git`
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run dev`
+4. Open the application in your browser at http://localhost:3000
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## Usage
 
-## Building
+The application allows users to keep track of tasks. You can create new tasks, update, edit, or delete them. It also supports logging and habit tracking.
 
-To create a production:
+## Features
 
-```bash
-npm run build
-```
+Some of the key features of the application include:
 
-You can preview the production build with `npm run preview`.
+- PWA support for offline use
+- Create new counter tasks. Update/Edit/Delete them
+- See a log of last updated
+- Perform habit tracking using calendar view
+- Share screenshot of the main screen using Share API
+
+## Contributing
+
+Contributions to this project are always welcome. Here are some ways you can contribute:
+
+- Test the application and report any bugs or issues
+- Suggest new features or improvements
+- Submit a pull request with bug fixes or new features
+
+When contributing to this repository, please first discuss the change you wish to make via issue, email or any other communication method before making a change.
+
+## License
+
+This application is licensed under the MIT License. Feel free to use and modify the code for personal or commercial use.
