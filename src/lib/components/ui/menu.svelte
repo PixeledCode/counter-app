@@ -2,12 +2,30 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { MenuIcon } from 'lucide-svelte';
 	import { shareScreenshot } from './screenshot';
+	import { toast } from 'svelte-sonner';
 	export let onClick: (e: { detail: string }, b?: boolean) => void;
 
 	let canShare = 'share' in navigator;
 
 	function handleShare() {
 		shareScreenshot(document.querySelector('.list-container') as HTMLElement);
+	}
+
+	function downloadData() {
+		const data = localStorage.getItem('count_list');
+
+		if (data) {
+			const blob = new Blob([data], { type: 'text/json' });
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = 'count_list_old.json';
+			a.click();
+			URL.revokeObjectURL(url);
+			toast.success('Data downloaded successfully');
+		} else {
+			toast.error('No data to download');
+		}
 	}
 </script>
 
@@ -27,5 +45,6 @@
 		{#if canShare}
 			<DropdownMenu.Item on:click={handleShare}>Share</DropdownMenu.Item>
 		{/if}
+		<DropdownMenu.Item on:click={downloadData}>Download</DropdownMenu.Item>
 	</DropdownMenu.Content>
 </DropdownMenu.Root>
